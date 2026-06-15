@@ -49,6 +49,7 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
+    platform: linux/amd64
     restart: unless-stopped
     environment:
       PMA_HOST: db
