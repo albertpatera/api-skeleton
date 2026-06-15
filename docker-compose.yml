@@ -36,7 +36,7 @@ services:
       - webserver
   #depends_on:
      # - db
-    db:
+  db:
     image: mysql:8.0
     restart: unless-stopped
     environment:
