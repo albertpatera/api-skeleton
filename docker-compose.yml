@@ -36,7 +36,7 @@ services:
       - webserver
   #depends_on:
      # - db
-  db:
+    db:
     image: mysql:8.0
     restart: unless-stopped
     environment:
@@ -47,6 +47,18 @@ services:
     volumes:
       - db_data:/var/lib/mysql
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: unless-stopped
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: appuser
+      PMA_PASSWORD: apppass
+    expose:
+      - "80"
+    depends_on:
+      - db
 
 volumes:
   db_data:
