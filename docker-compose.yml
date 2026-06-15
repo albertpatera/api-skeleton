@@ -3,7 +3,6 @@ services:
     build:
       context: .
       dockerfile: php/Dockerfile
-    #image: php:8.3-fpm-alpine
     restart: unless-stopped
     volumes:
       - ./app:/var/www/html
@@ -20,7 +19,6 @@ services:
     depends_on:
       - php
 
-  
   cloudflared:
     image: cloudflare/cloudflared:latest
     restart: unless-stopped
@@ -34,8 +32,7 @@ services:
       - ${CLOUDFLARE_TUNNEL_TOKEN_LEGAL}
     depends_on:
       - webserver
-  #depends_on:
-     # - db
+
   db:
     image: mysql:8.0
     restart: unless-stopped
@@ -48,8 +45,8 @@ services:
       - db_data:/var/lib/mysql
 
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin:latest
-    platform: linux/amd64
+    image: phpmyadmin:latest
+    platform: linux/arm64/v8
     restart: unless-stopped
     environment:
       PMA_HOST: db
